@@ -27,3 +27,7 @@ resource('users','UsersController');
 // get('/users/{id}/edit','UsersController@edit')->name('users.edit');
 // patch('/users/{id}','UsersController@update')->name('users.update');
 // delete('/users/{id}','UsersController@destroy')->name('users.destroy');
+
+get('login','SessionsController@create')->name('login');
+post('login','SessionsController@store')->name('login');
+delete('logout','SessionsController@destroy')->name('logout');
