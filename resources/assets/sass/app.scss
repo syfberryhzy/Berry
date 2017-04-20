@@ -199,3 +199,8 @@ input {
     max-width: 100px;
   }
 }
+
+/* univarsal */
+.alert-status {
+  @extend .alert-info;
+}
