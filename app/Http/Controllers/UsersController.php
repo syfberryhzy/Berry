@@ -17,7 +17,7 @@ class UsersController extends Controller
 
     public function __contruct(){
         $this->middleware('auth',[
-            'only'=>['eidt','update']
+            'only'=>['eidt','update','destroy','following','followers']
         ]);
 
         $this->middleware('guest',[
@@ -122,5 +122,19 @@ class UsersController extends Controller
         $statuses = $user->statuses()->orderby('created_at','desc')->paginate(20);
 
         return view('users.show',compact('user','statuses'));
+    }
+
+    public function followings($id){
+        $user = User::findOrFail($id);
+        $users = $user->followings()->paginate(20);
+        $title = "关注的人";
+        return view('users.show_follow',compact('users','title'));
+    }
+
+    public function followers($id) {
+        $user = user::findOrFail($id);
+        $users = $user->followers()->paginate(20);
+        $title = "粉丝";
+        return view('users.show_follow',compact('users','title'));
     }
 }

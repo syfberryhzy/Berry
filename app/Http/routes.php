@@ -40,3 +40,10 @@ get('password/reset/{token}','Auth\PasswordController@getReset')->name('password
 post('password/reset','Auth\PasswordController@postReset')->name('password.update');
 
 resource('statuses','StatusesController',['only'=>['store','destroy']]);
+
+get('/users/{id}/followings','UsersController@followings')->name('users.followings');
+get('/user/{id}/followers','UserController@followers')->name('users.followers');
+// 关注用户
+post('/users/followers/{id}','FollowersController@store')->name('followers.store');
+// 取消关注用户
+delete('/users/followers/{id}','FollowersController@destroy')->name('followers.destroy');
