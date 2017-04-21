@@ -49,4 +49,13 @@ class User extends Model implements AuthenticatableContract,
             $user->activation_token = str_random(30);
         });
     }
+
+    public function statuses(){
+        // 在用户模型中，指明一个用户拥有多条微博
+        return $this->hasMany(Status::class);
+    }
+
+    public function feed(){
+        return $this->statuses()->orderby('created_at','desc');
+    }
 }

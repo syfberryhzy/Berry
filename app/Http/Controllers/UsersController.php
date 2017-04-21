@@ -33,10 +33,10 @@ class UsersController extends Controller
         return view('users.create');
     }
 
-    public function show($id){
-        $user = User::findOrFail($id);
-        return view('users.show',compact('user'));
-    }
+    // public function show($id){
+    //     $user = User::findOrFail($id);
+    //     return view('users.show',compact('user'));
+    // }
 
     public function store(Request $request){
         $this->validate($request,[
@@ -115,5 +115,12 @@ class UsersController extends Controller
         $user->delete();
         session()->flash('success','成功删除用户！');
         return back();
+    }
+
+    public function show($id){
+        $user = User::findOrFail($id);
+        $statuses = $user->statuses()->orderby('created_at','desc')->paginate(20);
+
+        return view('users.show',compact('user','statuses'));
     }
 }

@@ -27,3 +27,15 @@ $factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     ];
 
 });
+
+$factory->define(App\Models\Status::class, function (Faker\Generator $faker) {
+    $date_time = $faker->date . ' ' . $faker->time;
+    static $password;
+
+    return [
+        'content' => $faker->text(),
+        'created_at'=> $date_time,
+        'updated_at'=> $date_time,
+    ];
+
+});
